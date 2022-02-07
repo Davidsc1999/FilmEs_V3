@@ -1,0 +1,10 @@
+<nav>
+    <a class="btn btn-dark" href="/">Inici</a>
+    <a class="btn btn-dark" href="/admin">Afegir pelicules</a>
+    <a class="btn btn-dark" href="/directors">Afegir directors</a>
+    {% if (session and session.login) %}
+        <a class="btn btn-dark" href="/auth/logout">Logout</a>
+    {% else %}
+        <a class="btn btn-dark" href="/auth/login">Login</a>
+    {% endif %}
+</nav>

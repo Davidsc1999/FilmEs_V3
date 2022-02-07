@@ -1,0 +1,23 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %} Peliculas | Listado {% endblock %}
+
+{% block contenido %}
+
+    <h1>Listado de peliculas</h1>
+
+    <ul>
+        {% for pelicula in pelicules %}
+            <li>{{ pelicula.titol }}
+                <form style="display:inline" action="/admin/{{ pelicula.id }}" method="post">
+                    <a class="btn btn-primary" href="/admin/editar/{{ pelicula.id }}">Editar</a>
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </form>
+            </li>
+        {% else %}
+            <li>No hay pelicules que mostrar</li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="/admin/nova">Anyadir pel.licula</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+<nav>
+    <a class="btn btn-dark" href="/">Inici</a>
+    {% if (session and session.login)%}
+        <a class="btn btn-dark" href="/admin">Administració</a>
+        <a class="btn btn-dark" href="/logout">Logout</a>
+    {% else %}
+        <a class="btn btn-dark" href="/auth/login">Administració</a>
+    {% endif %}
+</nav>

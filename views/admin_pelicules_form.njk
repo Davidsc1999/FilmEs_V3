@@ -1,0 +1,132 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Pelicules | Nova{% endblock %}
+
+{% block contenido %}
+    {% if pelicula %}
+        <h1>Editar pelicula seleccionada</h1>
+        <form action="/admin/{{ pelicula.id }}?_method=PUT" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put" />
+            <div class="form-group">
+                <label for="titulo">Títol:</label>
+                <input type="text" class="form-control" name="titol" 
+                    placeholder="Títol de la pelicula..." value="{{ pelicula.titol }}"/>
+            </div>
+            <div class="form-group">
+                <label for="sinopsi">Sinopsi:</label>
+                <input type="text" class="form-control" name="sinopsi"
+                    placeholder="Sinopsi de la pelicula..." value="{{ pelicula.sinopsi }}"/>
+            </div>
+            <div class="form-group">
+                <label for="duracio">Duració:</label>
+                <input type="text" class="form-control" name="duracio"
+                    placeholder="Duració de la pelicula..." value="{{ pelicula.duracio }}"/>
+            </div>
+            <div class="form-group">
+                <label for="genere">Genere:</label>
+                <select name="genere">
+                    <option>Elegix un genere...</option>
+                    {% for genere in generes %}
+                        <option value="{{genere}}">{{genere}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imatge">Imatge:</label>
+                <input type="file" class="form-control" name="imatge"
+                    placeholder="Imatge de la pelicula..." value="{{ pelicula.imatge }}"/>
+            </div>
+            <div class="form-group">
+                <label for="valoracio">Valoració:</label>
+                <input type="text" class="form-control" name="valoracio"
+                    placeholder="Valoració de la pelicula..." value="{{ pelicula.valoracio }}"/>
+            </div>
+            <div class="form-group">
+                <label for="nomPlataforma">Plataforma:</label>
+                <input type="text" class="form-control" name="plataformes"
+                    placeholder="Plataforma de streaming de la pelicula..." value="{{ pelicula.plataformes.nom }}"/>
+            </div>
+             <div class="form-group">
+                <label for="dataPlataforma">Data de venciment:</label>
+                <input type="date" class="form-control" name="data"
+                    placeholder="Plataforma de streaming de la pelicula..." value="{{pelicula.plataforma.data}}"/>
+            </div>
+            <div class="form-group">
+                <label for="quantitatPlataforma">Premium:
+                <input type="checkbox" name="quantitat" value="{{ pelicula.plataformes.quantitat}}"/></label>
+            </div>
+            <div class="form-group">
+                <label for="director">Director:</label>
+                <select class="form-control" name="director">
+                    <option>Elegix un director: </option>
+                    {% for director in directors %}
+                        <option value="{{director.id}}">{{director.nom}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    {% else %}
+        <h1>Anyadir nova pelicula</h1>
+        <form action="/admin" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="titol">Títol:</label>
+                <input type="text" class="form-control" name="titol" 
+                    placeholder="Títol de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="sinopsi">Sinopsi:</label>
+                <input type="text" class="form-control" name="sinopsi"
+                    placeholder="Sinopsi de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="duracio">Duració:</label>
+                <input type="text" class="form-control" name="duracio"
+                    placeholder="Duració de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="genere">Genere:</label>
+                <select name="genere">
+                    <option>Elegix un genere...</option>
+                    {% for genere in generes %}
+                        <option value="{{genere}}">{{genere}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imatge">Imatge:</label>
+                <input type="file" class="form-control" name="imatge"
+                    placeholder="Imatge de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="valoracio">Valoració:</label>
+                <input type="text" class="form-control" name="valoracio"
+                    placeholder="Valoració de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="plataformes">Plataforma:</label>
+                <input type="text" class="form-control" name="nom"
+                    placeholder="Plataforma de streaming de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="plataformes">Data de venciment:</label>
+                <input type="date" class="form-control" name="data"
+                    placeholder="Plataforma de streaming de la pelicula..."/>
+            </div>
+            <div class="form-group">
+                <label for="plataformes">Premium:
+                <input type="checkbox" name="quantitat"/></label>
+            </div>
+            <div class="form-group">
+                <label for="director">Director:</label>
+                <select name="director" required>
+                    <option>Elegix un director...</option>
+                    {% for director in directors %}
+                        <option value="{{director.id}}">{{director.nom}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    {% endif %}
+{% endblock %}

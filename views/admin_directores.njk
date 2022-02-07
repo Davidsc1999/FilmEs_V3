@@ -1,0 +1,20 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Directors | Llistat{% endblock %}
+{% block contenido %}
+    <h1>Listado de directores</h1>
+    <div width="100%">
+        {% for director in directors %}
+            <li>{{director.nom}}</li>
+        
+            <li>
+                <form style="display:inline" action="/directors/{{director.id}}" method="post">
+                    <a class="btn btn-success" href="/directors/editar/{{director.id}}">Editar</a>
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </div>
+    <a class="btn btn-dark" id="anyadirDirector" href="/directors/nou">Anyadir nou director</a>
+{% endblock %}

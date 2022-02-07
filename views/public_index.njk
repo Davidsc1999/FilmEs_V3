@@ -1,0 +1,22 @@
+{% extends "public_base.njk" %}
+{% block titulo %}Buscar Pelicula{% endblock %}
+{% block contenido %}
+    <form method="get" action="/buscar">
+        <div class="input-group">
+            <input id="buscar" class="form-control" name="buscar" placeholder="Buscar" type="text">
+                <span class="input-group-btn">
+                    <button id="enviar" type="submit" class="btn btn-dark">Buscar</button>
+                </span>
+        </div>
+    </form>
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+    <ul>
+        {% for pelicula in pelicules %}
+            <li>{{ pelicula.titol }}<a href="/pelicula/{{ pelicula.id }}">Ver ficha</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
